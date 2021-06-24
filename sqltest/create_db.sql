@@ -3,7 +3,8 @@ IF DB_ID('TEST_DB') IS NULL
     CREATE DATABASE TEST_DB;
 GO
 
-
+USE TEST_DB;
+GO
 
 -- CREATE TABLE EMPLOYEE
 CREATE TABLE EMPLOYEE (
@@ -11,7 +12,7 @@ CREATE TABLE EMPLOYEE (
     Emp_FirstName VARCHAR(255) NOT NULL,
     Emp_LastName VARCHAR(255) NOT NULL,
     Emp_Age INT NOT NULL,
-    Emp_BuildingID INT
+    Emp_Building_ID INT
 );
 GO 
 
@@ -28,7 +29,7 @@ GO
 -- INSERT DATA
 -- DATA INTO TABLE EMPLOYEE
 INSERT INTO EMPLOYEE 
-    (Emp_FirstName, Emp_LastName, Emp_Age, Emp_BuildingID)
+    (Emp_FirstName, Emp_LastName, Emp_Age, Emp_Building_ID)
 VALUES
     ('First', 'Last', 20, 1),
     ('Harris', 'Adni', 25, 2),
