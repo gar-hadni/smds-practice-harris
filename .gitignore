@@ -520,3 +520,8 @@ tools/gulp-tasks/cldr/cldr-data/
 
 # Husky
 .husky/_
+
+
+
+
+*.code-workspace
