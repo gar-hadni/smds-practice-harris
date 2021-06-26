@@ -1,0 +1,27 @@
+<h1> All Employee </h1>
+
+<table mat-table [dataSource]="emp" class="mat-elevation-z8" width="100%">
+    
+    <ng-container matColumnDef="emp_ID">
+        <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.emp_ID}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="emp_FirstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.emp_FirstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="emp_LastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.emp_LastName}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+    <!-- <div *ngFor="let e of emp | async">
+        <span> {{ e.emp_FirstName }} </span>
+    </div>   -->
+

@@ -1,0 +1,29 @@
+<!-- <p>home-page works!</p>
+
+<button class="button" (click)="testGet()">testGet</button>
+
+<div *ngFor="let e of emp | async">
+    <span> {{ e.emp_FirstName }} </span>
+</div> 
+
+<button class="button" routerLink="/list-all">List All</button>
+
+-->
+
+
+<mat-grid-list cols="2" rowHeight="100%">
+   
+    <mat-grid-tile>
+        <a routerLink="/emp/list">
+            <mat-grid-tile-header>All Employees</mat-grid-tile-header>
+        </a>
+    </mat-grid-tile>
+    
+    <mat-grid-tile>
+        <a routerLink="/emp/add">
+            <mat-grid-tile-header>Add Employee</mat-grid-tile-header>
+        </a>
+    </mat-grid-tile>
+    
+</mat-grid-list>
+  
