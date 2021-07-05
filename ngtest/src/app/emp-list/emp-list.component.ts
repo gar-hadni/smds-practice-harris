@@ -9,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class EmpListComponent implements OnInit {
   emp  = this.httpClient.get('https://localhost:44388/api/Employees')
   
-  displayedColumns: string[] = [ 'emp_ID', 'emp_FirstName', 'emp_LastName'];
+  displayedColumns: string[] = [ 'position', 'emp_ID', 'emp_FirstName', 'emp_LastName'];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(public httpClient: HttpClient) { }
 
   ngOnInit() {
     

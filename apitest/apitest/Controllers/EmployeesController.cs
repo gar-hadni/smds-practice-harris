@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using apitest.Models;
+using Microsoft.Data.SqlClient;
 
 namespace apitest.Controllers
 {
@@ -24,27 +25,39 @@ namespace apitest.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            return await _context.Employee.ToListAsync();
+            //return await _context.Employee.ToListAsync();
+
+            //var students = context.Students.FromSql("GetStudents 'Bill'").ToList();
+
+            return await _context.Employee.FromSqlRaw("EXEC SP_ALL_EMPLOYEE").ToListAsync();
         }
 
         // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int id)
+        //public async Task<ActionResult<Employee>> GetEmployee(int id)
+        //public async Task<IQueryable<Employee>> GetEmployee (int id)
         {
-            var employee = await _context.Employee.FindAsync(id);
+            //var employee = await _context.Employee.FindAsync(id);
 
-            if (employee == null)
-            {
-                return NotFound();
-            }
+            //if (employee == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return employee;
+            //return employee;
+
+
+            var Emp_ID = new SqlParameter("@Emp_ID", id);
+            return  await _context.Employee.FromSqlRaw("EXEC SP_EMPLOYEE_BY_ID @Emp_ID", Emp_ID).ToListAsync();
+       
         }
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+
+        [HttpPost("/delete/{id}")] //TODO
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
             if (id != employee.Emp_ID)
@@ -77,11 +90,21 @@ namespace apitest.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        //public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public async Task<ActionResult<IEnumerable<Employee>>> PostEmployee(Employee employee)
         {
-            _context.Employee.Add(employee);
-            await _context.SaveChangesAsync();
 
+            //_context.Employee.Add(employee);
+            //await _context.SaveChangesAsync();
+
+            var Emp_FirstName = new SqlParameter("@Emp_FirstName", employee.Emp_FirstName);
+            var Emp_LastName = new SqlParameter("@Emp_LastName", employee.Emp_LastName);
+            var Emp_Age = new SqlParameter("@Emp_Age", employee.Emp_Age);
+            var Emp_Building_ID = new SqlParameter("@Emp_Building_id", employee.Emp_Building_ID);
+
+            var temp = _context.Employee.FromSqlRaw("EXEC SP_ADD_EMPLOYEE @Emp_FirstName, @Emp_LastName, @Emp_Age, @Emp_Building_ID", Emp_FirstName, Emp_LastName, Emp_Age, Emp_Building_ID).ToListAsync();
+
+            Console.WriteLine("temp => " + temp.);
             return CreatedAtAction("GetEmployee", new { id = employee.Emp_ID }, employee);
         }
 

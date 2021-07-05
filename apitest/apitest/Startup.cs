@@ -28,10 +28,12 @@ namespace apitest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(c =>
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddDbContext<TestDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestDbContext")));
             services.AddControllers();
@@ -50,7 +52,7 @@ namespace apitest
             app.UseRouting();
 
             //app.UseCors(MyAllowSpecificOrigins);
-            app.UseCors(options=> options.AllowAnyOrigin());
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 

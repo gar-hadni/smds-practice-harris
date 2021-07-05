@@ -5,7 +5,7 @@ import { EmpListComponent } from './emp-list/emp-list.component';
 import { EmpAddComponent } from './emp-add/emp-add.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: EmpListComponent },
   { path: 'emp/list', component: EmpListComponent },
   { path: 'emp/add', component: EmpAddComponent }
 ];

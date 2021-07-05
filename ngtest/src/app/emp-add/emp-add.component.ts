@@ -29,14 +29,14 @@ export class EmpAddComponent implements OnInit {
     var post_response = this.httpClient.post(
       'https://localhost:44388/api/Employees',
       {
-        "emp_FirstName": data.emp_FirstName,
-        "emp_LastName": data.emp_LastName,
-        "emp_Age": data.emp_Age,
-        "emp_Building_ID": data.emp_Building_ID,
-      })
+        emp_FirstName: data.value.emp_FirstName,
+        emp_LastName: data.value.emp_LastName,
+        emp_Age: data.value.emp_Age,
+        emp_Building_ID: data.value.emp_Building_ID,
+      }).subscribe()
 
     console.log(post_response)
-    console.log(data)
+    console.log(data.value)
 
     this.addForm.reset();
   }

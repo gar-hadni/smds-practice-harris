@@ -1,7 +1,18 @@
-<h1> All Employee </h1>
+<h1 style="text-align: center;"> Employees List </h1>
 
-<table mat-table [dataSource]="emp" class="mat-elevation-z8" width="100%">
-    
+<div style="text-align: center;">
+    <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" style="text-align: center; margin: 20px" routerLink="/emp/add">
+        Add New Employee
+    </button>
+</div>
+
+<table mat-table [dataSource]="emp" class="mat-elevation-z8" width="80%" style="margin-left: auto; margin-right: auto;">
+
+    <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No </th>
+        <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="emp_ID">
         <th mat-header-cell *matHeaderCellDef> Employee ID </th>
         <td mat-cell *matCellDef="let element"> {{element.emp_ID}} </td>
