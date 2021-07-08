@@ -102,9 +102,9 @@ namespace apitest.Controllers
             var Emp_Age = new SqlParameter("@Emp_Age", employee.Emp_Age);
             var Emp_Building_ID = new SqlParameter("@Emp_Building_id", employee.Emp_Building_ID);
 
-            var temp = _context.Employee.FromSqlRaw("EXEC SP_ADD_EMPLOYEE @Emp_FirstName, @Emp_LastName, @Emp_Age, @Emp_Building_ID", Emp_FirstName, Emp_LastName, Emp_Age, Emp_Building_ID).ToListAsync();
+            var temp = await _context.Employee.FromSqlRaw("EXEC SP_ADD_EMPLOYEE @Emp_FirstName, @Emp_LastName, @Emp_Age, @Emp_Building_ID", Emp_FirstName, Emp_LastName, Emp_Age, Emp_Building_ID).ToListAsync();
 
-            Console.WriteLine("temp => " + temp.);
+            //Console.WriteLine("temp => " + temp.);
             return CreatedAtAction("GetEmployee", new { id = employee.Emp_ID }, employee);
         }
 
