@@ -2,3 +2,5 @@
 A practice repository to ramp up new hire in SMDS.
 
 newBranch
+
+new Branch 2
